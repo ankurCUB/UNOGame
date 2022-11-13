@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/game_background"
+        tools:context=".UNOGameFragment">
+
+        <TextView
+            android:id="@+id/endGame"
+            style="@style/gameButton"
+            android:text="End Game"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/player1Deck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:itemCount="5"
+            tools:listitem="@layout/card_vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endGame" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/player2Deck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:itemCount="2"
+            tools:listitem="@layout/card_horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/player3Deck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:itemCount="2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/card_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/playCard"
+            style="@style/gameButton"
+            android:text="Play Card"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/humanPlayerDeck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="16dp"
+            tools:itemCount="2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/card_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/playCard"/>
+
+        <FrameLayout
+            app:layout_constraintTop_toBottomOf="@id/player1Deck"
+            app:layout_constraintStart_toEndOf="@id/player2Deck"
+            android:id="@+id/extraDeck"
+            android:background="@drawable/card_bg"
+            android:layout_margin="16dp"
+            android:layout_width="50dp"
+            android:layout_height="85dp">
+        </FrameLayout>
+
+        <FrameLayout
+            app:layout_constraintTop_toBottomOf="@id/extraDeck"
+            app:layout_constraintStart_toEndOf="@id/player2Deck"
+            app:layout_constraintEnd_toStartOf="@id/player3Deck"
+            app:layout_constraintBottom_toTopOf="@id/humanPlayerDeck"
+            android:id="@+id/cardInPlay"
+            android:background="@drawable/card_bg"
+            android:layout_margin="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="0.5882" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
