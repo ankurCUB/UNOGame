@@ -1,4 +1,6 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.unoGame;
+
+import com.example.unogame.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.player;
 
 public class ComputerPlayer extends Player{
     public ComputerPlayer(int id, String username){

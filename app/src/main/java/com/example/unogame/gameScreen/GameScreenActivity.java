@@ -1,9 +1,15 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.unogame.DatabaseManager;
+import com.example.unogame.R;
+import com.example.unogame.ScreenNavigator;
+import com.example.unogame.dependencyInjection.AppComponent;
+import com.example.unogame.dependencyInjection.DaggerAppComponent;
 
 import javax.inject.Inject;
 

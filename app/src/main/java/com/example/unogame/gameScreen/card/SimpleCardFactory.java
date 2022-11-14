@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.card;
 
 public class SimpleCardFactory implements CardFactory{
     public Card getCard(String type, int color, int number){

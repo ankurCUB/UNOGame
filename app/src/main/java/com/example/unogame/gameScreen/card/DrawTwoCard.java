@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.card;
 
 public class DrawTwoCard extends SpecialCard{
     DrawTwoCard(int color){

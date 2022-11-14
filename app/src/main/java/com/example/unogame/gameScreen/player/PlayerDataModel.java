@@ -1,4 +1,6 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.player;
+
+import com.example.unogame.gameScreen.card.Card;
 
 import java.util.ArrayList;
 

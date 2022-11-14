@@ -1,5 +1,11 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.unoGame;
 
+
+import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.card.CardFactory;
+import com.example.unogame.gameScreen.card.SimpleCardFactory;
+import com.example.unogame.gameScreen.player.ComputerPlayer;
+import com.example.unogame.gameScreen.player.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.Random;

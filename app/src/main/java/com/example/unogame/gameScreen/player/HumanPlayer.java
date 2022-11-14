@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.player;
 
 public class HumanPlayer extends Player{
 
