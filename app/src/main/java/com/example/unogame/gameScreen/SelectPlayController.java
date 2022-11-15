@@ -20,7 +20,7 @@ public class SelectPlayController {
     }
 
     public void startGame(Activity activity){
-        screenNavigator.navigateToFragment(new UNOGameFragment(), activity);
+        screenNavigator.navigateToFragment(UNOGameFragment.newInstance(unoGameController), activity);
     }
 
     public void setBackButtonVisibility(Activity activity, boolean backButtonVisibility){

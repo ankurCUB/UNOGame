@@ -5,19 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.unogame.R;
 import com.example.unogame.ScreenNavigator;
-import com.example.unogame.databinding.CardVerticalNumbersBinding;
 import com.example.unogame.databinding.FragmentUNOGameBinding;
 import com.example.unogame.dependencyInjection.AppComponent;
 import com.example.unogame.dependencyInjection.DaggerAppComponent;
-import com.example.unogame.gameScreen.card.NumberCard;
 
 import javax.inject.Inject;
 
@@ -27,6 +23,14 @@ public class UNOGameFragment extends Fragment {
 
     @Inject
     ScreenNavigator screenNavigator;
+
+    private UNOGameController controller;
+
+    public static UNOGameFragment newInstance(UNOGameController controller){
+        UNOGameFragment fragment = new UNOGameFragment();
+        fragment.controller = controller;
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,53 +51,27 @@ public class UNOGameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        controller.startGame();
+
         RecyclerView player1Deck = binding.player1Deck;
         player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        player1Deck.setAdapter(getAdapter(R.layout.card_vertical_numbers));
+        player1Deck.setAdapter(controller.getComputerPlayerAdapter(1));
 
 
         RecyclerView player2Deck = binding.player2Deck;
         player2Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player2Deck.setAdapter(getAdapter(R.layout.card_horizontal));
+        player2Deck.setAdapter(controller.getComputerPlayerAdapter(2));
 
 
         RecyclerView player3Deck = binding.player3Deck;
         player3Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player3Deck.setAdapter(getAdapter(R.layout.card_horizontal));
+        player3Deck.setAdapter(controller.getComputerPlayerAdapter(3));
 
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(getAdapter(R.layout.card_vertical_skip));
+        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter(4));
 
-    }
-
-    RecyclerView.ViewHolder getViewHolder(View view){
-        return new RecyclerView.ViewHolder(view) {
-        };
-    }
-
-    RecyclerView.Adapter getAdapter(int id){
-        return new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                CardVerticalNumbersBinding binding = CardVerticalNumbersBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-                binding.setCard(new NumberCard(0, R.color.yellow));
-                return getViewHolder(binding.getRoot());
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 10;
-            }
-        };
     }
 }

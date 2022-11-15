@@ -1,6 +1,8 @@
 package com.example.unogame.gameScreen.unoGame;
 
 
+import androidx.databinding.ObservableArrayList;
+
 import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.card.CardFactory;
 import com.example.unogame.gameScreen.card.SimpleCardFactory;
@@ -15,8 +17,8 @@ import java.util.Random;
 
 public class UNOBoard {
     private final UserDataModel userDataModel;
-    public ArrayList<Card> cards = new ArrayList<>();
-    private final ArrayList<Player> players = new ArrayList<>();
+    public ObservableArrayList<Card> cards = new ObservableArrayList<>();
+    private final ObservableArrayList<Player> players = new ObservableArrayList<>();
 
     public UNOBoard(UserDataModel userDataModel){
         this.userDataModel = userDataModel;
@@ -66,5 +68,9 @@ public class UNOBoard {
                 cards.remove(index);
             }
         }
+    }
+
+    public ArrayList<Card> getCardsForPlayer(int playerNumber) {
+        return players.get(playerNumber-1).playerData.deck;
     }
 }

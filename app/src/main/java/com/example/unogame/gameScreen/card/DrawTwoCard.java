@@ -8,4 +8,9 @@ public class DrawTwoCard implements Card{
     DrawTwoCard(int color){
         this.color = color;
     }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
+    }
 }

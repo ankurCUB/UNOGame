@@ -1,6 +1,5 @@
 package com.example.unogame.gameScreen.card;
 
-import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +10,8 @@ import androidx.databinding.BindingAdapter;
 import com.example.unogame.R;
 
 public interface Card {
-    int resourceLayout = 0;
+
+    int getLayout();
 
     @BindingAdapter("android:cardBackground")
     static void setCardBackground(ConstraintLayout layout, int color) {
@@ -30,8 +30,8 @@ public interface Card {
 
     @BindingAdapter("android:numberColor")
     static void setColor(TextView textView, int color){
-        int actualColor = ContextCompat.getColor(textView.getContext(), color);
-        textView.setTextColor(actualColor);
+//        int actualColor = ContextCompat.getColor(textView.getContext(), color);
+//        textView.setTextColor(actualColor);
     }
 
     @BindingAdapter("android:cardBackground")

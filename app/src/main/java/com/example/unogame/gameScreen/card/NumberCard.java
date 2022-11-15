@@ -8,7 +8,12 @@ public class NumberCard implements Card{
     public int color;
     public boolean isReversed = true;
     public NumberCard(int number, int color){
-        this.number = "0";
+        this.number = ""+number;
         this.color = color;
+    }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
     }
 }

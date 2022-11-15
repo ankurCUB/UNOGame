@@ -8,4 +8,9 @@ public class SkipCard implements Card {
     public SkipCard(int color){
         this.color = color;
     }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
+    }
 }

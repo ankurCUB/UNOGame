@@ -8,4 +8,9 @@ public class ReverseCard implements Card {
     public ReverseCard(int color){
         this.color = color;
     }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
+    }
 }

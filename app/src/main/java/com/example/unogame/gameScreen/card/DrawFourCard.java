@@ -6,4 +6,9 @@ public class DrawFourCard implements Card {
     public int resourceLayout = R.layout.card_vertical_draw_four;
     DrawFourCard(){
     }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
+    }
 }
