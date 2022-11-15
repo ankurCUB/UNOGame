@@ -11,6 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="50dp"
         android:layout_height="85dp"
+        android:layout_margin="8dp"
         android:background="@drawable/card_bg_white"
         android:padding="4dp">
         <ImageView

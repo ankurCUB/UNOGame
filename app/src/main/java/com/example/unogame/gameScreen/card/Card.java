@@ -30,8 +30,8 @@ public interface Card {
 
     @BindingAdapter("android:numberColor")
     static void setColor(TextView textView, int color){
-//        int actualColor = ContextCompat.getColor(textView.getContext(), color);
-//        textView.setTextColor(actualColor);
+        int actualColor = ContextCompat.getColor(textView.getContext(), color);
+        textView.setTextColor(actualColor);
     }
 
     @BindingAdapter("android:cardBackground")

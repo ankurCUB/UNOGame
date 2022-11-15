@@ -15,6 +15,12 @@ public class SimpleCardFactory implements CardFactory{
         if(type.equals("Draw Two")){
             c = new DrawTwoCard(color);
             return c;
+        } else if(type.equals("Skip")){
+            c = new SkipCard(color);
+            return c;
+        } else if(type.equals("Reverse")){
+            c = new ReverseCard(color);
+            return c;
         }
         return null;
     }

@@ -3,6 +3,7 @@ package com.example.unogame.gameScreen.unoGame;
 
 import androidx.databinding.ObservableArrayList;
 
+import com.example.unogame.R;
 import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.card.CardFactory;
 import com.example.unogame.gameScreen.card.SimpleCardFactory;
@@ -19,6 +20,7 @@ public class UNOBoard {
     private final UserDataModel userDataModel;
     public ObservableArrayList<Card> cards = new ObservableArrayList<>();
     private final ObservableArrayList<Player> players = new ObservableArrayList<>();
+    private final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
 
     public UNOBoard(UserDataModel userDataModel){
         this.userDataModel = userDataModel;
@@ -42,19 +44,23 @@ public class UNOBoard {
         CardFactory cardFactory = new SimpleCardFactory();
         // generate number cards (one of each 0 and 9 card and 2 of every number between 1 and 8 for each color)
         for(int i = 0; i < 10; i++){
-            for(int j = 1; j < 5; j++){
+            for(int j = 0; j < 4; j++){
                 if(i == 0 || i == 9) {
-                    cards.add(cardFactory.getCard("Number", j, i));
+                    cards.add(cardFactory.getCard("Number", colors[j], i));
                 } else{
-                    cards.add(cardFactory.getCard("Number", j, i));
-                    cards.add(cardFactory.getCard("Number", j, i));
+                    cards.add(cardFactory.getCard("Number", colors[j], i));
+                    cards.add(cardFactory.getCard("Number", colors[j], i));
                 }
             }
         }
         // generate special cards. 2 of each (+2, Reverse, and Skip) per color
-        for(int i = 1; i < 5; i++){
+        for(int i = 0; i < 4; i++){
             cards.add(cardFactory.getCard("Draw Two", i));
             cards.add(cardFactory.getCard("Draw Two", i));
+            cards.add(cardFactory.getCard("Skip", i));
+            cards.add(cardFactory.getCard("Skip", i));
+            cards.add(cardFactory.getCard("Reverse", i));
+            cards.add(cardFactory.getCard("Reverse", i));
         }
     }
 

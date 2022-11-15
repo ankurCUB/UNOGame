@@ -13,8 +13,14 @@
         android:layout_width="50dp"
         android:layout_height="85dp"
         android:layout_margin="8dp"
-        android:cardBackground="@{card.color}"
-        tools:background="@drawable/card_bg_red" >
+        android:padding="4dp"
+        android:background="@drawable/card_bg_white" >
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/uno_card_front"
+            android:cardBackground="@{card.color}"
+            tools:background="@drawable/card_bg_red"
+            android:layout_height="match_parent"/>
         <ImageView
             android:src="@drawable/ic_uno_reverse"
             android:layout_margin="4dp"
@@ -23,10 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="12dp"
             android:layout_height="12dp"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:src="@drawable/uno_card_front"
-            android:layout_height="match_parent"/>
         <ImageView
             android:reverseIcon="@{card.color}"
             tools:src="@drawable/ic_uno_reverse_red"

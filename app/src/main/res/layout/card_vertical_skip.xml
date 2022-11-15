@@ -11,6 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="50dp"
+        android:layout_margin="8dp"
+        android:padding="4dp"
+        android:background="@drawable/card_bg_white"
         android:layout_height="85dp">
         <androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
             android:layout_width="match_parent"
