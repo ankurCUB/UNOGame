@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="card"
+            type="com.example.unogame.gameScreen.card.SkipCard" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="50dp"
         android:layout_height="85dp">
         <androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:background="@drawable/card_bg_red">
+            android:cardBackground="@{card.color}"
+            tools:background="@drawable/card_bg_red">
             <ImageView
                 android:src="@drawable/ic_skip_white"
                 android:layout_margin="4dp"
@@ -21,7 +29,8 @@
                 android:src="@drawable/uno_card_front"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:src="@drawable/ic_skip_red"
+                android:skipIcon="@{card.color}"
+                tools:src="@drawable/ic_skip_red"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

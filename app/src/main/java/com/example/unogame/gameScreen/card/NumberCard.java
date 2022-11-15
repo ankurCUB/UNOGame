@@ -4,11 +4,11 @@ import com.example.unogame.R;
 
 public class NumberCard implements Card{
     public int resourceLayout = R.layout.card_vertical_numbers;
-    public int number;
+    public String number;
     public int color;
     public boolean isReversed = true;
     public NumberCard(int number, int color){
-        this.number = number;
+        this.number = "0";
         this.color = color;
     }
 }

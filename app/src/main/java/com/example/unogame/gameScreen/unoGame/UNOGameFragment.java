@@ -1,6 +1,9 @@
 package com.example.unogame.gameScreen.unoGame;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,15 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.unogame.R;
 import com.example.unogame.ScreenNavigator;
+import com.example.unogame.databinding.CardVerticalNumbersBinding;
 import com.example.unogame.databinding.FragmentUNOGameBinding;
 import com.example.unogame.dependencyInjection.AppComponent;
 import com.example.unogame.dependencyInjection.DaggerAppComponent;
+import com.example.unogame.gameScreen.card.NumberCard;
 
 import javax.inject.Inject;
 
@@ -63,7 +64,7 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(getAdapter(R.layout.card_vertical_numbers));
+        humanPlayerDeck.setAdapter(getAdapter(R.layout.card_vertical_skip));
 
     }
 
@@ -79,8 +80,9 @@ public class UNOGameFragment extends Fragment {
             @NonNull
             @Override
             public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(id, parent, false);
-                return getViewHolder(view);
+                CardVerticalNumbersBinding binding = CardVerticalNumbersBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+                binding.setCard(new NumberCard(0, R.color.yellow));
+                return getViewHolder(binding.getRoot());
             }
 
             @Override
