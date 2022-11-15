@@ -2,10 +2,10 @@ package com.example.unogame.gameScreen.card;
 
 import com.example.unogame.R;
 
-public class DrawTwoCard implements Card{
-    public int resourceLayout = R.layout.card_vertical_draw_two;
+public class ReverseCard implements Card {
+    public int resourceLayout = R.layout.card_vertical_reverse;
     public int color;
-    DrawTwoCard(int color){
+    ReverseCard(int color){
         this.color = color;
     }
 }

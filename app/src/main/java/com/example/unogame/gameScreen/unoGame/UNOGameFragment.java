@@ -48,7 +48,7 @@ public class UNOGameFragment extends Fragment {
         super.onResume();
         RecyclerView player1Deck = binding.player1Deck;
         player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        player1Deck.setAdapter(getAdapter(R.layout.card_vertical));
+        player1Deck.setAdapter(getAdapter(R.layout.card_vertical_numbers));
 
 
         RecyclerView player2Deck = binding.player2Deck;
@@ -63,7 +63,7 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(getAdapter(R.layout.card_vertical));
+        humanPlayerDeck.setAdapter(getAdapter(R.layout.card_vertical_numbers));
 
     }
 

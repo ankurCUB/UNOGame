@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen.data;
 
 
 import javax.inject.Inject;

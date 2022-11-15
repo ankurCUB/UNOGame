@@ -1,25 +1,22 @@
 package com.example.unogame.gameScreen;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.unogame.ScreenNavigator;
+import androidx.fragment.app.Fragment;
+
 import com.example.unogame.databinding.FragmentSelectPlayBinding;
 import com.example.unogame.dependencyInjection.AppComponent;
 import com.example.unogame.dependencyInjection.DaggerAppComponent;
-import com.example.unogame.gameScreen.unoGame.UNOGameFragment;
 
 import javax.inject.Inject;
 
 public class SelectPlayFragment extends Fragment {
 
     @Inject
-    ScreenNavigator screenNavigator;
+    SelectPlayController selectPlayController;
 
     FragmentSelectPlayBinding binding;
 
@@ -35,16 +32,14 @@ public class SelectPlayFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentSelectPlayBinding.inflate(inflater, container, false);
-        screenNavigator.setBackButton(getActivity(), false);
+        selectPlayController.setBackButtonVisibility(getActivity(), false);
         return binding.getRoot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        binding.playGame.setOnClickListener(view -> {
-            screenNavigator.navigateToFragment(new UNOGameFragment(), getActivity());
-        });
+        binding.playGame.setOnClickListener(view -> selectPlayController.startGame(getActivity()));
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.unogame.gameScreen.unoGame;
 
+import android.content.Context;
+
 import com.example.unogame.Observer;
 
 import java.util.ArrayList;
@@ -9,17 +11,14 @@ public class UNOGameModel {
     public int turn;
     public UNOBoard unoBoard;
 
-    private List<Observer> observers = new ArrayList<>();
+    public UNOGameModel(int turn, UNOBoard unoBoard){
+        this.turn = turn;
+        this.unoBoard = unoBoard;
+    }
 
     public void initialize(){
         // create the uno deck
         unoBoard.generateBoard();
         turn = 0;
     }
-
-//    public void registerObserver(Observer O){
-//        observers.add(O);
-//    }
-
-
 }
