@@ -35,26 +35,26 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/player2Deck"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
             tools:itemCount="2"
             tools:listitem="@layout/card_horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/player1Deck"
+            app:layout_constraintBottom_toTopOf="@id/humanPlayerDeck"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/player3Deck"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
             tools:itemCount="2"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/card_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/player1Deck"
+            app:layout_constraintBottom_toTopOf="@id/humanPlayerDeck"/>
 
         <TextView
             android:id="@+id/playCard"

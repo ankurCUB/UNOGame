@@ -92,7 +92,7 @@ public class UNOGameFragment extends Fragment {
 
             @Override
             public int getItemCount() {
-                return 3;
+                return 10;
             }
         };
     }
