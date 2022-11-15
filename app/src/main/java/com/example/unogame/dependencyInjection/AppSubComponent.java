@@ -1,4 +1,7 @@
-package com.example.unogame;
+package com.example.unogame.dependencyInjection;
+
+import com.example.unogame.gameScreen.SelectPlayFragment;
+import com.example.unogame.gameScreen.unoGame.UNOGameFragment;
 
 import dagger.Subcomponent;
 

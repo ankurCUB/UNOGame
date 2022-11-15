@@ -1,4 +1,4 @@
-package com.example.unogame;
+package com.example.unogame.gameScreen;
 
 import android.os.Bundle;
 
@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.unogame.ScreenNavigator;
 import com.example.unogame.databinding.FragmentSelectPlayBinding;
+import com.example.unogame.dependencyInjection.AppComponent;
+import com.example.unogame.dependencyInjection.DaggerAppComponent;
+import com.example.unogame.gameScreen.unoGame.UNOGameFragment;
 
 import javax.inject.Inject;
 
