@@ -14,7 +14,7 @@
             android:id="@+id/endGame"
             style="@style/gameButton"
             android:text="End Game"
-            android:textSize="10sp"
+            android:textSize="11sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:itemCount="5"
-            tools:listitem="@layout/card_vertical"
+            tools:listitem="@layout/card_vertical_flipped"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
             android:layout_margin="16dp"
             tools:itemCount="2"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/card_vertical"
+            tools:listitem="@layout/card_vertical_draw_four"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/playCard"/>
@@ -84,10 +84,14 @@
             app:layout_constraintTop_toBottomOf="@id/player1Deck"
             app:layout_constraintStart_toEndOf="@id/player2Deck"
             android:id="@+id/extraDeck"
-            android:background="@drawable/card_bg"
+            android:background="@drawable/card_bg_white"
             android:layout_margin="16dp"
             android:layout_width="50dp"
+            android:rotation="-30"
             android:layout_height="85dp">
+            <include layout="@layout/card_vertical_flipped"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
 
         <FrameLayout
@@ -96,11 +100,15 @@
             app:layout_constraintEnd_toStartOf="@id/player3Deck"
             app:layout_constraintBottom_toTopOf="@id/humanPlayerDeck"
             android:id="@+id/cardInPlay"
-            android:background="@drawable/card_bg"
+            android:background="@drawable/card_bg_white"
             android:layout_margin="16dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="0.5882" />
+            app:layout_constraintDimensionRatio="0.5882">
+            <include layout="@layout/card_vertical_wildcard"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

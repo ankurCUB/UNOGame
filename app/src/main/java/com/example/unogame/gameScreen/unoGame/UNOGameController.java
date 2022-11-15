@@ -1,26 +1,16 @@
 package com.example.unogame.gameScreen.unoGame;
 
-import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.data.UserDataModel;
 
-import java.util.ArrayList;
+import javax.inject.Inject;
 
 public class UNOGameController {
-    UNOGameModel gameModel;
+    private final UNOGameModel gameModel;
 
-    public UNOGameController(UNOGameModel gameModel){
-        this.gameModel = gameModel;
-        gameModel.initialize();
-    }
-
-    public void playCard(int id){
-        // This will be called on click of the play card button in the gamescreen fragment.
-        // I am not implementin this since I am rather unsure of how we will be implementing the "view"
-        // will we be essentially just adding two attributes to the UNOGameFragment and have it directly interacting with the controller?
-    }
-
-    private boolean gameWon(){
-        ArrayList<Card> humanCards = gameModel.unoBoard.humanPlayer.playerData.deck;
-        ArrayList<Card> computerCards = gameModel.unoBoard.computerPlayer.playerData.deck;
-        return (humanCards.size() == 0 || computerCards.size() == 0);
+    @Inject
+    public UNOGameController(){
+        UserDataModel userDataModel = new UserDataModel(0, "Lincoln");
+        UNOBoard unoBoard = new UNOBoard(userDataModel);
+        gameModel = new UNOGameModel(0, unoBoard);
     }
 }
