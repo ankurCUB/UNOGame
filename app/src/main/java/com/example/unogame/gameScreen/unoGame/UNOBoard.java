@@ -16,6 +16,7 @@ import java.util.Random;
 public class UNOBoard {
     private final UserDataModel userDataModel;
     public ArrayList<Card> cards = new ArrayList<>();
+    public Card topDeck;
     private final ArrayList<Player> players = new ArrayList<>();
 
     public UNOBoard(UserDataModel userDataModel){
@@ -29,11 +30,12 @@ public class UNOBoard {
     }
 
     private void generatePlayers() {
-        for (int i = 0; i < 3; i++) {
+        // will comment this back in when human player is complete.
+        //players.add(new HumanPlayer(userDataModel));
+        for (int i = 0; i < 4; i++) {
             UserDataModel computerUserDataModel = new UserDataModel((int) System.currentTimeMillis(), "Bot");
             players.add(new ComputerPlayer(computerUserDataModel, new EasyPlayStrategy()));
         }
-        players.add(new HumanPlayer(userDataModel));
     }
 
     private void generateDeck(){
@@ -67,4 +69,31 @@ public class UNOBoard {
             }
         }
     }
+
+    public void dealSingleCard(Player player){
+        Random rand = new Random();
+        int index = rand.nextInt(cards.size() - 1);
+        player.playerData.deck.add(cards.get(index));
+        cards.remove(index);
+        // if the deck for dealing is exhausted, create a new one
+        if(cards.size() == 0){
+            generateDeck();
+        }
+    }
+
+    public boolean victoryCheck(){
+        // if any of the players have 0 cards in deck, victory has been achieved
+        for (Player p: players) {
+            if (p.playerData.deck.size() == 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Player getPlayer(int index){
+        return players.get(index);
+    }
+
+    public int getNumPlayers(){return players.size();}
 }
