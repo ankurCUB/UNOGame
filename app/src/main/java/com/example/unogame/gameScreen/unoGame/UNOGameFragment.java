@@ -45,6 +45,11 @@ public class UNOGameFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentUNOGameBinding.inflate(inflater, container, false);
         screenNavigator.setBackButton(getActivity(), false);
+
+        binding.playCard.setOnClickListener(view -> {
+            controller.playCard(this.getContext());
+        });
+
         return binding.getRoot();
     }
 
@@ -71,7 +76,13 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter(4));
+        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter());
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        controller.pauseGame();
     }
 }

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableField;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,16 +18,20 @@ import com.example.unogame.databinding.CardVerticalReverseBinding;
 import com.example.unogame.databinding.CardVerticalSkipBinding;
 import com.example.unogame.databinding.CardVerticalWildcardBinding;
 import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.card.DrawFourCard;
 import com.example.unogame.gameScreen.card.DrawTwoCard;
 import com.example.unogame.gameScreen.card.NumberCard;
 import com.example.unogame.gameScreen.card.ReverseCard;
 import com.example.unogame.gameScreen.card.SkipCard;
+import com.example.unogame.gameScreen.card.WildCard;
 
 import java.util.ArrayList;
 
 public class HumanPlayerAdapter extends RecyclerView.Adapter<HumanPlayerAdapter.CardViewHolder> {
 
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
+
+    public ObservableField<CardViewHolder> selectedCard = new ObservableField<>();
 
     public HumanPlayerAdapter(ArrayList<Card> cards) {
         this.cards = cards;
@@ -66,16 +71,54 @@ public class HumanPlayerAdapter extends RecyclerView.Adapter<HumanPlayerAdapter.
     }
 
     @Override
+    public void onViewAttachedToWindow(@NonNull CardViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull CardViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        if(selectedCard.get() == holder){
+            selectedCard.set(null);
+        }
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
+        Card card;
         if(cards.get(position).getClass() == DrawTwoCard.class){
+            card = (DrawTwoCard) cards.get(position);
             ((CardVerticalDrawTwoBinding)holder.viewDataBinding).setCard((DrawTwoCard) cards.get(position));
         } else if(cards.get(position).getClass() == NumberCard.class){
+            card = (NumberCard) cards.get(position);
             ((CardVerticalNumbersBinding)holder.viewDataBinding).setCard((NumberCard) cards.get(position));
         } else if(cards.get(position).getClass() == ReverseCard.class){
+            card = (ReverseCard) cards.get(position);
             ((CardVerticalReverseBinding)holder.viewDataBinding).setCard((ReverseCard) cards.get(position));
         } else if(cards.get(position).getClass() == SkipCard.class){
+            card = (SkipCard) cards.get(position);
             ((CardVerticalSkipBinding)holder.viewDataBinding).setCard((SkipCard) cards.get(position));
+        } else if(cards.get(position).getClass() == DrawFourCard.class){
+            card = (DrawFourCard) cards.get(position);
+        } else {
+            card = (WildCard) cards.get(position);
         }
+
+        holder.card = card;
+
+        holder.itemView.setOnClickListener(view -> {
+            if(selectedCard.get() == holder){
+                selectedCard.set(null);
+                view.setTranslationY(0);
+            } else{
+                RecyclerView.ViewHolder previousCard = selectedCard.get();
+                if(previousCard!=null) {
+                    previousCard.itemView.setTranslationY(0);
+                }
+                selectedCard.set(holder);
+                view.setTranslationY(-16);
+            }
+        });
     }
 
     @Override
@@ -91,6 +134,8 @@ public class HumanPlayerAdapter extends RecyclerView.Adapter<HumanPlayerAdapter.
     protected static class CardViewHolder extends RecyclerView.ViewHolder {
 
         ViewDataBinding viewDataBinding;
+
+        Card card;
 
         public CardViewHolder(@NonNull View itemView, ViewDataBinding viewDataBinding) {
             super(itemView);

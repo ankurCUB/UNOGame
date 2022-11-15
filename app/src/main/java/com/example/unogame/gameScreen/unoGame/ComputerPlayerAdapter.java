@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ComputerPlayerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<Card> cards;
+    private final ArrayList<Card> cards;
 
     public ComputerPlayerAdapter(ArrayList<Card> cards) {
         this.cards = cards;
