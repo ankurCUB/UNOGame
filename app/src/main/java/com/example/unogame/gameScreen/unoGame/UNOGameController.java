@@ -15,6 +15,7 @@ public class UNOGameController {
         UserDataModel userDataModel = new UserDataModel(0, "Lincoln");
         // pass generated board to UNO game Model
         UNOBoard unoBoard = new UNOBoard(userDataModel);
+        unoBoard.generateBoard();
         gameModel = new UNOGameModel(0, unoBoard);
     }
 

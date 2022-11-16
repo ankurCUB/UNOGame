@@ -11,10 +11,13 @@ import java.util.List;
 public class UNOGameModel {
     private int turn;
     private UNOBoard unoBoard;
+    private int direction = 1;
+    public int color;
 
     public UNOGameModel(int turn, UNOBoard unoBoard){
         this.turn = turn;
         this.unoBoard = unoBoard;
+        this.color = unoBoard.topDeck.color;
     }
 
     public boolean victoryCheck(){
@@ -36,10 +39,16 @@ public class UNOGameModel {
     }
 
     public void incrementTurn(){
-        if(turn == unoBoard.getNumPlayers() - 1){
+        if(turn == unoBoard.getNumPlayers() - 1 && direction == 1){
             turn = 0;
+        }else if(turn == 0 && direction == -1){
+            turn = unoBoard.getNumPlayers() - 1;
         } else{
-            turn ++;
+            turn += direction;
         }
+    }
+
+    public void reverseDirection(){
+        direction = direction * -1;
     }
 }

@@ -5,18 +5,24 @@ import com.example.unogame.gameScreen.player.Player;
 import com.example.unogame.gameScreen.unoGame.UNOGameModel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EasyPlayStrategy implements GamePlayStrategy {
     @Override
     public void move(UNOGameModel model) {
         // the easy play strategy implements a greedy approach and will just play the first card it finds that is valid
         Card playedCard = null;
+        Random rand = new Random();
         while(playedCard == null){
             for(Card c: model.getCurrentPlayer().playerData.deck){
                 if(c.getClass().getSimpleName() == "WildCard" || c.getClass().getSimpleName() == "DrawFourCard"){
                     playedCard = c;
-                } else if(c.color == model.getBoard().topDeck.color){
+                    model.color = rand.nextInt(4) + 1;
+                } else if(c.color == model.color){
                     playedCard = c;
+                } else if(c.number.equals(model.getBoard().topDeck.number)){
+                    playedCard = c;
+                    model.color = c.color;
                 }
             }
             // if the played card was not set, draw a card

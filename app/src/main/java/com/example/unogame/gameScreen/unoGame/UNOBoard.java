@@ -27,6 +27,14 @@ public class UNOBoard {
         generatePlayers();
         generateDeck();
         dealCards();
+        // set top deck and playing color (must be a number card to start for simplicity
+        for(Card c: cards){
+            if (c.getClass().getSimpleName().equals("NumberCard")){
+                topDeck = c;
+                cards.remove(c);
+                break;
+            }
+        }
     }
 
     private void generatePlayers() {
@@ -44,10 +52,10 @@ public class UNOBoard {
         for(int i = 0; i < 10; i++){
             for(int j = 1; j < 5; j++){
                 if(i == 0 || i == 9) {
-                    cards.add(cardFactory.getCard("Number", j, i));
+                    cards.add(cardFactory.getCard("Number", j, String.valueOf(i)));
                 } else{
-                    cards.add(cardFactory.getCard("Number", j, i));
-                    cards.add(cardFactory.getCard("Number", j, i));
+                    cards.add(cardFactory.getCard("Number", j, String.valueOf(i)));
+                    cards.add(cardFactory.getCard("Number", j, String.valueOf(i)));
                 }
             }
         }
@@ -55,7 +63,20 @@ public class UNOBoard {
         for(int i = 1; i < 5; i++){
             cards.add(cardFactory.getCard("Draw Two", i));
             cards.add(cardFactory.getCard("Draw Two", i));
+            cards.add(cardFactory.getCard("Skip", i));
+            cards.add(cardFactory.getCard("Skip", i));
+            cards.add(cardFactory.getCard("Reverse", i));
+            cards.add(cardFactory.getCard("Reverse", i));
         }
+        // generate 4 of each for +4 and WildCards
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
     }
 
     private void dealCards(){
