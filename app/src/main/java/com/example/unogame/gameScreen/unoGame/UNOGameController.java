@@ -7,7 +7,6 @@ import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 
 import com.example.unogame.gameScreen.card.Card;
-import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.data.UserDataModel;
 import com.example.unogame.gameScreen.player.Player;
 
@@ -31,7 +30,7 @@ public class UNOGameController {
     }
 
     public void startGame(){
-        gameModel.initialize();
+//        gameModel.initialize();
     }
 
     ComputerPlayerAdapter getComputerPlayerAdapter(int playerNumber){
