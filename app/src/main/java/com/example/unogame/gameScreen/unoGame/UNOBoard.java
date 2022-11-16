@@ -21,6 +21,7 @@ public class UNOBoard {
     public ObservableArrayList<Card> cards = new ObservableArrayList<>();
     private final ObservableArrayList<Player> players = new ObservableArrayList<>();
     private final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
+    public Card topDeck;
 
     public UNOBoard(UserDataModel userDataModel){
         this.userDataModel = userDataModel;
@@ -30,14 +31,23 @@ public class UNOBoard {
         generatePlayers();
         generateDeck();
         dealCards();
+        // set top deck and playing color (must be a number card to start for simplicity
+        for(Card c: cards){
+            if (c.getClass().getSimpleName().equals("NumberCard")){
+                topDeck = c;
+                cards.remove(c);
+                break;
+            }
+        }
     }
 
     private void generatePlayers() {
-        for (int i = 0; i < 3; i++) {
+        // will comment this back in when human player is complete.
+        //players.add(new HumanPlayer(userDataModel));
+        for (int i = 0; i < 4; i++) {
             UserDataModel computerUserDataModel = new UserDataModel((int) System.currentTimeMillis(), "Bot");
             players.add(new ComputerPlayer(computerUserDataModel, new EasyPlayStrategy()));
         }
-        players.add(new HumanPlayer(userDataModel));
     }
 
     private void generateDeck(){
@@ -46,10 +56,10 @@ public class UNOBoard {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 4; j++){
                 if(i == 0 || i == 9) {
-                    cards.add(cardFactory.getCard("Number", colors[j], i));
+                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
                 } else{
-                    cards.add(cardFactory.getCard("Number", colors[j], i));
-                    cards.add(cardFactory.getCard("Number", colors[j], i));
+                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
+                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
                 }
             }
         }
@@ -62,6 +72,15 @@ public class UNOBoard {
             cards.add(cardFactory.getCard("Reverse", i));
             cards.add(cardFactory.getCard("Reverse", i));
         }
+        // generate 4 of each for +4 and WildCards
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Draw Four"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard("Wild Card"));
     }
 
     private void dealCards(){
@@ -79,4 +98,31 @@ public class UNOBoard {
     public ArrayList<Card> getCardsForPlayer(int playerNumber) {
         return players.get(playerNumber-1).playerData.deck;
     }
+
+    public void dealSingleCard(Player player){
+        Random rand = new Random();
+        int index = rand.nextInt(cards.size() - 1);
+        player.playerData.deck.add(cards.get(index));
+        cards.remove(index);
+        // if the deck for dealing is exhausted, create a new one
+        if(cards.size() == 0){
+            generateDeck();
+        }
+    }
+
+    public boolean victoryCheck(){
+        // if any of the players have 0 cards in deck, victory has been achieved
+        for (Player p: players) {
+            if (p.playerData.deck.size() == 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Player getPlayer(int index){
+        return players.get(index);
+    }
+
+    public int getNumPlayers(){return players.size();}
 }

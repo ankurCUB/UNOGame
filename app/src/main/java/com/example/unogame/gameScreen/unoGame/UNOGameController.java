@@ -7,7 +7,9 @@ import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 
 import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.data.UserDataModel;
+import com.example.unogame.gameScreen.player.Player;
 
 import java.util.ArrayList;
 
@@ -20,8 +22,11 @@ public class UNOGameController {
 
     @Inject
     public UNOGameController(){
+        // create new UNO board passing a user data model matching the current user
         UserDataModel userDataModel = new UserDataModel(0, "Lincoln");
+        // pass generated board to UNO game Model
         UNOBoard unoBoard = new UNOBoard(userDataModel);
+        unoBoard.generateBoard();
         gameModel = new UNOGameModel(0, unoBoard);
     }
 
@@ -58,6 +63,14 @@ public class UNOGameController {
     public void playCard(Context context) {
         if(gameModel.selectedCard != null){
             Toast.makeText(context, ""+gameModel.selectedCard.getClass(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void playGame(){
+        // Just keep playing until someone wins. Right now this is setup for computer players only. Humans will change this logic a bit
+        while(!gameModel.victoryCheck()){
+            Player currentPlayer = gameModel.getCurrentPlayer();
+            currentPlayer.move(gameModel);
         }
     }
 }

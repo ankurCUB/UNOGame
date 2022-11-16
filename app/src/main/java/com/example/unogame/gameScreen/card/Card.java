@@ -10,6 +10,9 @@ import androidx.databinding.BindingAdapter;
 import com.example.unogame.R;
 
 public interface Card {
+    int resourceLayout = 0;
+    int color = -1;
+    String number = "-1";
 
     int getLayout();
 

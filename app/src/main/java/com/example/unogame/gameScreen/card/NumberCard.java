@@ -7,8 +7,9 @@ public class NumberCard implements Card{
     public String number;
     public int color;
     public boolean isReversed = true;
-    public NumberCard(int number, int color){
-        this.number = ""+number;
+
+    public NumberCard(String number, int color){
+        this.number = number;
         this.color = color;
     }
 
