@@ -78,6 +78,8 @@ public class UNOGameFragment extends Fragment {
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
         humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter());
 
+        controller.playGame();
+
     }
 
     @Override
