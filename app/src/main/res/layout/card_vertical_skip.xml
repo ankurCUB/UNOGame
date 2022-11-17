@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="card"
+            type="com.example.unogame.gameScreen.card.SkipCard" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="50dp"
+        android:layout_margin="8dp"
+        android:padding="4dp"
+        android:background="@drawable/card_bg_white"
+        android:layout_height="85dp">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:cardBackground="@{card.color}"
+            tools:background="@drawable/card_bg_red">
+            <ImageView
+                android:src="@drawable/ic_skip_white"
+                android:layout_margin="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="12dp"
+                android:layout_height="12dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/uno_card_front"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:skipIcon="@{card.color}"
+                tools:src="@drawable/ic_skip_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="0.3"/>
+            <ImageView
+                android:src="@drawable/ic_skip_white"
+                android:layout_margin="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="12dp"
+                android:layout_height="12dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

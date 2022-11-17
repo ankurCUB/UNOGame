@@ -1,4 +1,6 @@
-package com.example.unogame;
+package com.example.unogame.dependencyInjection;
+
+import com.example.unogame.gameScreen.data.DatabaseManager;
 
 import dagger.Module;
 import dagger.Provides;

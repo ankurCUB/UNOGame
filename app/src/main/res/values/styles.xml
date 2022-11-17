@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="gameButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/red_button_bg</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/yellow</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Letters">
+        <item name="fontFamily">sans-serif-thin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>

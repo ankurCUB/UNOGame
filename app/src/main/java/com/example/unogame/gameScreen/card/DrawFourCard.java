@@ -1,0 +1,15 @@
+package com.example.unogame.gameScreen.card;
+
+import com.example.unogame.R;
+
+public class DrawFourCard implements Card {
+    public int resourceLayout = R.layout.card_vertical_draw_four;
+    public int color = 5;
+    DrawFourCard(){
+    }
+
+    @Override
+    public int getLayout() {
+        return resourceLayout;
+    }
+}
