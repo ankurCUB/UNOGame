@@ -9,8 +9,8 @@ import com.example.unogame.gameScreen.card.CardFactory;
 import com.example.unogame.gameScreen.card.SimpleCardFactory;
 import com.example.unogame.gameScreen.data.UserDataModel;
 import com.example.unogame.gameScreen.player.ComputerPlayer;
-import com.example.unogame.gameScreen.player.HumanPlayer;
 import com.example.unogame.gameScreen.player.Player;
+import com.example.unogame.gameScreen.player.playStrategy.CardType;
 import com.example.unogame.gameScreen.player.playStrategy.EasyPlayStrategy;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class UNOBoard {
         dealCards();
         // set top deck and playing color (must be a number card to start for simplicity
         for(Card c: cards){
-            if (c.getClass().getSimpleName().equals("NumberCard")){
+            if (c.cardType == CardType.NumberCard) {
                 topDeck = c;
                 cards.remove(c);
                 break;
@@ -56,31 +56,31 @@ public class UNOBoard {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 4; j++){
                 if(i == 0 || i == 9) {
-                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
-                } else{
-                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
-                    cards.add(cardFactory.getCard("Number", colors[j], String.valueOf(i)));
+                    cards.add(cardFactory.getCard(CardType.NumberCard, colors[j], String.valueOf(i)));
+                } else {
+                    cards.add(cardFactory.getCard(CardType.NumberCard, colors[j], String.valueOf(i)));
+                    cards.add(cardFactory.getCard(CardType.NumberCard, colors[j], String.valueOf(i)));
                 }
             }
         }
         // generate special cards. 2 of each (+2, Reverse, and Skip) per color
-        for(int i = 0; i < 4; i++){
-            cards.add(cardFactory.getCard("Draw Two", i));
-            cards.add(cardFactory.getCard("Draw Two", i));
-            cards.add(cardFactory.getCard("Skip", i));
-            cards.add(cardFactory.getCard("Skip", i));
-            cards.add(cardFactory.getCard("Reverse", i));
-            cards.add(cardFactory.getCard("Reverse", i));
+        for (int i = 0; i < 4; i++) {
+            cards.add(cardFactory.getCard(CardType.DrawTwoCard, i));
+            cards.add(cardFactory.getCard(CardType.DrawTwoCard, i));
+            cards.add(cardFactory.getCard(CardType.SkipCard, i));
+            cards.add(cardFactory.getCard(CardType.SkipCard, i));
+            cards.add(cardFactory.getCard(CardType.ReverseCard, i));
+            cards.add(cardFactory.getCard(CardType.ReverseCard, i));
         }
         // generate 4 of each for +4 and WildCards
-        cards.add(cardFactory.getCard("Draw Four"));
-        cards.add(cardFactory.getCard("Draw Four"));
-        cards.add(cardFactory.getCard("Draw Four"));
-        cards.add(cardFactory.getCard("Draw Four"));
-        cards.add(cardFactory.getCard("Wild Card"));
-        cards.add(cardFactory.getCard("Wild Card"));
-        cards.add(cardFactory.getCard("Wild Card"));
-        cards.add(cardFactory.getCard("Wild Card"));
+        cards.add(cardFactory.getCard(CardType.DrawFourCard));
+        cards.add(cardFactory.getCard(CardType.DrawFourCard));
+        cards.add(cardFactory.getCard(CardType.DrawFourCard));
+        cards.add(cardFactory.getCard(CardType.DrawFourCard));
+        cards.add(cardFactory.getCard(CardType.WildCard));
+        cards.add(cardFactory.getCard(CardType.WildCard));
+        cards.add(cardFactory.getCard(CardType.WildCard));
+        cards.add(cardFactory.getCard(CardType.WildCard));
     }
 
     private void dealCards(){

@@ -1,10 +1,8 @@
 package com.example.unogame.gameScreen.player.playStrategy;
 
 import com.example.unogame.gameScreen.card.Card;
-import com.example.unogame.gameScreen.player.Player;
 import com.example.unogame.gameScreen.unoGame.UNOGameModel;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class EasyPlayStrategy implements GamePlayStrategy {
@@ -15,12 +13,12 @@ public class EasyPlayStrategy implements GamePlayStrategy {
         Random rand = new Random();
         while(playedCard == null){
             for(Card c: model.getCurrentPlayer().playerData.deck){
-                if(c.getClass().getSimpleName() == "WildCard" || c.getClass().getSimpleName() == "DrawFourCard"){
+                if (c.cardType == CardType.WildCard || c.cardType == CardType.DrawFourCard) {
                     playedCard = c;
                     model.color = rand.nextInt(4) + 1;
-                } else if(c.color == model.color){
+                } else if (c.color == model.color) {
                     playedCard = c;
-                } else if(c.number.equals(model.getBoard().topDeck.number)){
+                } else if (c.number.equals(model.getBoard().topDeck.number)) {
                     playedCard = c;
                     model.color = c.color;
                 }

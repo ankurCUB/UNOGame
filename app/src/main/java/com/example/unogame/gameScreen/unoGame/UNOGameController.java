@@ -61,7 +61,7 @@ public class UNOGameController {
 
     public void playCard(Context context) {
         if(gameModel.selectedCard != null){
-            Toast.makeText(context, ""+gameModel.selectedCard.getClass(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "" + gameModel.selectedCard.cardType.name() + ":" + gameModel.selectedCard.number, Toast.LENGTH_SHORT).show();
         }
     }
 

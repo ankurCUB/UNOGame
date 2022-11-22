@@ -1,6 +1,5 @@
 package com.example.unogame.gameScreen.player;
 
-import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.data.UserDataModel;
 import com.example.unogame.gameScreen.player.playStrategy.GamePlayStrategy;
 import com.example.unogame.gameScreen.unoGame.UNOGameModel;
