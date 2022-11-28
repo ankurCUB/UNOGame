@@ -2,6 +2,7 @@ package com.example.unogame.gameScreen.unoGame;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import androidx.databinding.Observable;
@@ -88,7 +89,7 @@ public class UNOGameController {
     }
 
     public void pauseGame(){
-        humanPlayerAdapter.selectedCard.removeOnPropertyChangedCallback(selectedCardChangedCallback);
+//        humanPlayerAdapter.selectedCard.removeOnPropertyChangedCallback(selectedCardChangedCallback);
     }
 
     public void playCard(Context context) {
@@ -110,7 +111,17 @@ public class UNOGameController {
         };
 
         try {
-            AsyncTask.execute(runnable);
+            CountDownTimer timer = new CountDownTimer(4000, 1000) {
+                @Override
+                public void onTick(long l) {
+                    AsyncTask.execute(runnable);
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+            timer.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

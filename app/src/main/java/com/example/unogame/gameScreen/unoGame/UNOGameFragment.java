@@ -24,13 +24,8 @@ public class UNOGameFragment extends Fragment {
     @Inject
     ScreenNavigator screenNavigator;
 
-    private UNOGameController controller;
-
-    public static UNOGameFragment newInstance(UNOGameController controller){
-        UNOGameFragment fragment = new UNOGameFragment();
-        fragment.controller = controller;
-        return fragment;
-    }
+    @Inject
+    UNOGameController controller;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +42,7 @@ public class UNOGameFragment extends Fragment {
         screenNavigator.setBackButton(getActivity(), false);
 
         binding.playCard.setOnClickListener(view -> {
-//            controller.playCard(this.getContext());
+            controller.playCard(this.getContext());
             controller.playGame();
         });
 
