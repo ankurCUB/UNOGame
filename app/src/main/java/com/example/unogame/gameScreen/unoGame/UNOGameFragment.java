@@ -47,7 +47,8 @@ public class UNOGameFragment extends Fragment {
         screenNavigator.setBackButton(getActivity(), false);
 
         binding.playCard.setOnClickListener(view -> {
-            controller.playCard(this.getContext());
+//            controller.playCard(this.getContext());
+            controller.playGame();
         });
 
         return binding.getRoot();
@@ -61,24 +62,22 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView player1Deck = binding.player1Deck;
         player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        player1Deck.setAdapter(controller.getComputerPlayerAdapter(1));
+        player1Deck.setAdapter(controller.getComputerPlayerAdapter(1, this));
 
 
         RecyclerView player2Deck = binding.player2Deck;
         player2Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player2Deck.setAdapter(controller.getComputerPlayerAdapter(2));
+        player2Deck.setAdapter(controller.getComputerPlayerAdapter(2, this));
 
 
         RecyclerView player3Deck = binding.player3Deck;
         player3Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player3Deck.setAdapter(controller.getComputerPlayerAdapter(3));
+        player3Deck.setAdapter(controller.getComputerPlayerAdapter(3, this));
 
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter());
-
-        controller.playGame();
+        humanPlayerDeck.setAdapter(controller.getComputerPlayerAdapter(4, this));
 
     }
 

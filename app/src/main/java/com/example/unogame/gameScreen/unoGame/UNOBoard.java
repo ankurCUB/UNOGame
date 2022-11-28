@@ -14,20 +14,21 @@ import com.example.unogame.gameScreen.player.playStrategy.CardType;
 import com.example.unogame.gameScreen.player.playStrategy.EasyPlayStrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class UNOBoard {
     private final UserDataModel userDataModel;
     public ObservableArrayList<Card> cards = new ObservableArrayList<>();
-    private final ObservableArrayList<Player> players = new ObservableArrayList<>();
-    private final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
+    private final List<Player> players = new ArrayList<>();
+    public final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
     public Card topDeck;
 
-    public UNOBoard(UserDataModel userDataModel){
+    public UNOBoard(UserDataModel userDataModel) {
         this.userDataModel = userDataModel;
     }
 
-    public void generateBoard(){
+    public void generateBoard() {
         generatePlayers();
         generateDeck();
         dealCards();
@@ -65,12 +66,12 @@ public class UNOBoard {
         }
         // generate special cards. 2 of each (+2, Reverse, and Skip) per color
         for (int i = 0; i < 4; i++) {
-            cards.add(cardFactory.getCard(CardType.DrawTwoCard, i));
-            cards.add(cardFactory.getCard(CardType.DrawTwoCard, i));
-            cards.add(cardFactory.getCard(CardType.SkipCard, i));
-            cards.add(cardFactory.getCard(CardType.SkipCard, i));
-            cards.add(cardFactory.getCard(CardType.ReverseCard, i));
-            cards.add(cardFactory.getCard(CardType.ReverseCard, i));
+            cards.add(cardFactory.getCard(CardType.DrawTwoCard, colors[i]));
+            cards.add(cardFactory.getCard(CardType.DrawTwoCard, colors[i]));
+            cards.add(cardFactory.getCard(CardType.SkipCard, colors[i]));
+            cards.add(cardFactory.getCard(CardType.SkipCard, colors[i]));
+            cards.add(cardFactory.getCard(CardType.ReverseCard, colors[i]));
+            cards.add(cardFactory.getCard(CardType.ReverseCard, colors[i]));
         }
         // generate 4 of each for +4 and WildCards
         cards.add(cardFactory.getCard(CardType.DrawFourCard));
@@ -95,22 +96,24 @@ public class UNOBoard {
         }
     }
 
-    public ArrayList<Card> getCardsForPlayer(int playerNumber) {
-        return players.get(playerNumber-1).playerData.deck;
+    public ObservableArrayList<Card> getCardsForPlayer(int playerNumber) {
+        return players.get(playerNumber - 1).playerData.deck;
     }
 
-    public void dealSingleCard(Player player){
-        Random rand = new Random();
-        int index = rand.nextInt(cards.size() - 1);
-        player.playerData.deck.add(cards.get(index));
-        cards.remove(index);
+    public Card dealSingleCard(Player player) {
         // if the deck for dealing is exhausted, create a new one
-        if(cards.size() == 0){
+        if (cards.size() == 0) {
             generateDeck();
         }
+        Random rand = new Random();
+        int index = rand.nextInt(cards.size());
+        Card dealtCard = cards.get(index);
+        player.playerData.deck.add(dealtCard);
+        cards.remove(index);
+        return dealtCard;
     }
 
-    public boolean victoryCheck(){
+    public boolean victoryCheck() {
         // if any of the players have 0 cards in deck, victory has been achieved
         for (Player p: players) {
             if (p.playerData.deck.size() == 0){
