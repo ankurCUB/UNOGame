@@ -57,22 +57,22 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView player1Deck = binding.player1Deck;
         player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player1Deck.setAdapter(controller.getComputerPlayerAdapter(1, this));
+        player1Deck.setAdapter(controller.getComputerPlayerAdapter(2, this));
 
 
         RecyclerView player2Deck = binding.player2Deck;
         player2Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        player2Deck.setAdapter(controller.getComputerPlayerAdapter(2, this));
+        player2Deck.setAdapter(controller.getComputerPlayerAdapter(3, this));
 
 
         RecyclerView player3Deck = binding.player3Deck;
         player3Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player3Deck.setAdapter(controller.getComputerPlayerAdapter(3, this));
+        player3Deck.setAdapter(controller.getComputerPlayerAdapter(4, this));
 
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(controller.getComputerPlayerAdapter(4, this));
+        humanPlayerDeck.setAdapter(controller.getComputerPlayerAdapter(1, this));
 
     }
 
