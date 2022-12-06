@@ -24,13 +24,8 @@ public class UNOGameFragment extends Fragment {
     @Inject
     ScreenNavigator screenNavigator;
 
-    private UNOGameController controller;
-
-    public static UNOGameFragment newInstance(UNOGameController controller){
-        UNOGameFragment fragment = new UNOGameFragment();
-        fragment.controller = controller;
-        return fragment;
-    }
+    @Inject
+    UNOGameController controller;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +43,7 @@ public class UNOGameFragment extends Fragment {
 
         binding.playCard.setOnClickListener(view -> {
             controller.playCard(this.getContext());
+            controller.playGame();
         });
 
         return binding.getRoot();
@@ -60,23 +56,23 @@ public class UNOGameFragment extends Fragment {
         controller.startGame();
 
         RecyclerView player1Deck = binding.player1Deck;
-        player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        player1Deck.setAdapter(controller.getComputerPlayerAdapter(1));
+        player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
+        player1Deck.setAdapter(controller.getComputerPlayerAdapter(2, this));
 
 
         RecyclerView player2Deck = binding.player2Deck;
-        player2Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player2Deck.setAdapter(controller.getComputerPlayerAdapter(2));
+        player2Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
+        player2Deck.setAdapter(controller.getComputerPlayerAdapter(3, this));
 
 
         RecyclerView player3Deck = binding.player3Deck;
         player3Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        player3Deck.setAdapter(controller.getComputerPlayerAdapter(3));
+        player3Deck.setAdapter(controller.getComputerPlayerAdapter(4, this));
 
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter());
+        humanPlayerDeck.setAdapter(controller.getComputerPlayerAdapter(1, this));
 
     }
 

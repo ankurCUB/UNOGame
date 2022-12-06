@@ -1,13 +1,7 @@
 package com.example.unogame.gameScreen.unoGame;
 
-import android.content.Context;
-
-import com.example.unogame.Observer;
-import com.example.unogame.gameScreen.player.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.player.Player;
 
 public class UNOGameModel {
     public int turn;

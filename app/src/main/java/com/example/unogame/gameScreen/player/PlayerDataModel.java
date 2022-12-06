@@ -1,15 +1,15 @@
 package com.example.unogame.gameScreen.player;
 
+import androidx.databinding.ObservableArrayList;
+
 import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.data.UserDataModel;
-
-import java.util.ArrayList;
 
 public class PlayerDataModel {
     public int id;
     public String username;
     public int turn;
-    public ArrayList<Card> deck = new ArrayList<>();
+    public ObservableArrayList<Card> deck = new ObservableArrayList<>();
 
     public PlayerDataModel(UserDataModel userDataModel){
         this.id = userDataModel.id;

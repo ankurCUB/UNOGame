@@ -4,19 +4,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.unogame.databinding.CardVerticalFlippedBinding;
 import com.example.unogame.gameScreen.card.Card;
 
-import java.util.ArrayList;
-
 public class ComputerPlayerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final ArrayList<Card> cards;
+    private final ObservableArrayList<Card> cards;
 
-    public ComputerPlayerAdapter(ArrayList<Card> cards) {
+    public ComputerPlayerAdapter(ObservableArrayList<Card> cards) {
         this.cards = cards;
     }
 
