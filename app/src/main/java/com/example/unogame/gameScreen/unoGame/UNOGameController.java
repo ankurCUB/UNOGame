@@ -20,12 +20,16 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 public class UNOGameController {
+    public UNOGameModel getGameModel() {
+        return gameModel;
+    }
+
     private final UNOGameModel gameModel;
     private HumanPlayerAdapter humanPlayerAdapter;
     private Observable.OnPropertyChangedCallback selectedCardChangedCallback;
 
     @Inject
-    public UNOGameController(){
+    public UNOGameController() {
         // create new UNO board passing a user data model matching the current user
         UserDataModel userDataModel = new UserDataModel(0, "Lincoln");
         // pass generated board to UNO game Model

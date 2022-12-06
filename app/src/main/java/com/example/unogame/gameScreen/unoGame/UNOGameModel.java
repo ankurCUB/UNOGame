@@ -13,7 +13,9 @@ public class UNOGameModel {
     public UNOGameModel(int turn, UNOBoard unoBoard){
         this.turn = turn;
         this.unoBoard = unoBoard;
-        this.color = unoBoard.topDeck.color;
+        this.color = unoBoard.topDeck.get().color;
+
+
     }
 
     public boolean victoryCheck(){

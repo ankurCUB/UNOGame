@@ -2,6 +2,7 @@ package com.example.unogame.gameScreen.unoGame;
 
 
 import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableField;
 
 import com.example.unogame.R;
 import com.example.unogame.gameScreen.card.Card;
@@ -22,7 +23,7 @@ public class UNOBoard {
     public ObservableArrayList<Card> cards = new ObservableArrayList<>();
     private final List<Player> players = new ArrayList<>();
     public final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
-    public Card topDeck;
+    public ObservableField<Card> topDeck = new ObservableField<>();
 
     public UNOBoard(UserDataModel userDataModel) {
         this.userDataModel = userDataModel;
@@ -35,7 +36,7 @@ public class UNOBoard {
         // set top deck and playing color (must be a number card to start for simplicity
         for(Card c: cards){
             if (c.cardType == CardType.NumberCard) {
-                topDeck = c;
+                topDeck.set(c);
                 cards.remove(c);
                 break;
             }

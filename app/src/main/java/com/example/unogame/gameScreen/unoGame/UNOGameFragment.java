@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,13 @@ public class UNOGameFragment extends Fragment {
             controller.playCard(this.getContext());
             controller.playGame();
         });
+        controller.getGameModel().unoBoard.topDeck.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                binding.setModel(controller.getGameModel());
+            }
+        });
+        binding.setModel(controller.getGameModel());
 
         return binding.getRoot();
     }

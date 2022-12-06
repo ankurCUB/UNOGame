@@ -16,7 +16,7 @@ public class EasyPlayStrategy implements GamePlayStrategy {
         if (playedCard != null) {
             Log.i(tag, "Card successfully played");
             // set top deck card as the freshly played card
-            model.getBoard().topDeck = playedCard;
+            model.getBoard().topDeck.set(playedCard);
             // remove the played card
             model.getCurrentPlayer().playerData.deck.remove(playedCard);
         } else {
@@ -49,7 +49,7 @@ public class EasyPlayStrategy implements GamePlayStrategy {
         Random rand = new Random();
         if (selectedCard.color == model.color) {
             playedCard = selectedCard;
-        } else if (selectedCard.number.equals(model.getBoard().topDeck.number)) {
+        } else if (selectedCard.number.equals(model.getBoard().topDeck.get().number)) {
             playedCard = selectedCard;
             model.color = selectedCard.color;
         } else if (selectedCard.cardType == CardType.WildCard || selectedCard.cardType == CardType.DrawFourCard) {
