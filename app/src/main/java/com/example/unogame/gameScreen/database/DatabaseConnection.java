@@ -27,7 +27,12 @@ public class DatabaseConnection {
             while (rs.next()) {
                 Map<String,String> data = new Hashtable<String, String>();
                 for (int i = 1; i <= columnCount; i++) {
-                    data.put(metadata.getColumnName(i), rs.getString(i));
+                    String columnData = rs.getString(i);
+                    if(columnData == null){
+                        data.put(metadata.getColumnName(i), " ");
+                    } else{
+                        data.put(metadata.getColumnName(i), rs.getString(i));
+                    }
                 }
                 values.add(data);
             }
