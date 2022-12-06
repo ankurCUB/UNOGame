@@ -23,7 +23,7 @@ public class UNOBoard {
     public ObservableArrayList<Card> cards = new ObservableArrayList<>();
     private final List<Player> players = new ArrayList<>();
     public final int[] colors = new int[]{R.color.red, R.color.blue, R.color.yellow, R.color.green};
-    public ObservableField<Card> topDeck = new ObservableField<>();
+    public ObservableField<Card> topDeck = new ObservableField<>(new SimpleCardFactory().getCard(CardType.NumberCard, colors[0], "0"));
 
     public UNOBoard(UserDataModel userDataModel) {
         this.userDataModel = userDataModel;
