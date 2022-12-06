@@ -103,9 +103,6 @@ public class UNOGameController {
     }
 
     public void playGame() {
-        if (gameModel.victoryCheck()) {
-            return;
-        }
 
         // Just keep playing until someone wins. Right now this is setup for computer players only. Humans will change this logic a bit
 
@@ -115,10 +112,14 @@ public class UNOGameController {
         };
 
         try {
-            CountDownTimer timer = new CountDownTimer(4000, 1000) {
+            CountDownTimer timer = new CountDownTimer(400000, 1000) {
                 @Override
                 public void onTick(long l) {
-                    AsyncTask.execute(runnable);
+                    if (gameModel.victoryCheck()) {
+                        onFinish();
+                    } else {
+                        AsyncTask.execute(runnable);
+                    }
                 }
 
                 @Override

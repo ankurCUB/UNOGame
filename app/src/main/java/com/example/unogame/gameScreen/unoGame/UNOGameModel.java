@@ -8,12 +8,10 @@ public class UNOGameModel {
     public UNOBoard unoBoard;
     public Card selectedCard = null;
     private int direction = 1;
-    public int color;
 
     public UNOGameModel(int turn, UNOBoard unoBoard){
         this.turn = turn;
         this.unoBoard = unoBoard;
-        this.color = unoBoard.topDeck.get().color;
 
 
     }
