@@ -6,8 +6,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.example.unogame.gameScreen.data.UserDataModel;
+import com.example.unogame.gameScreen.database.DatabaseConnection;
 import com.example.unogame.gameScreen.unoGame.UNOBoard;
 import com.example.unogame.gameScreen.unoGame.UNOGameModel;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Tests {
     @Test
@@ -37,6 +41,13 @@ public class Tests {
         // pass generated board to UNO game Model
         UNOBoard unoBoard = new UNOBoard(userDataModel);
         unoBoard.generateBoard();
+    }
 
+    @Test
+    public void TestDBConnection(){
+        DatabaseConnection dbc = new DatabaseConnection();
+        ArrayList<Map<String,String>> queriedData = dbc.QueryDatabase("SELECT * FROM users");
+        System.out.println(queriedData);
+        assertTrue(queriedData.size() != 0);
     }
 }
