@@ -1,10 +1,15 @@
 package com.example.unogame.gameScreen.unoGame;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import androidx.databinding.Observable;
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableList;
+import androidx.fragment.app.Fragment;
 
 import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.data.UserDataModel;
@@ -29,16 +34,44 @@ public class UNOGameController {
         gameModel = new UNOGameModel(0, unoBoard);
     }
 
-    public void startGame(){
+    public void startGame() {
 //        gameModel.initialize();
     }
 
-    ComputerPlayerAdapter getComputerPlayerAdapter(int playerNumber){
-        ArrayList<Card> cards = gameModel.unoBoard.getCardsForPlayer(playerNumber);
-        return new ComputerPlayerAdapter(cards);
+    ComputerPlayerAdapter getComputerPlayerAdapter(int playerNumber, Fragment fragment) {
+        ObservableArrayList<Card> cards = gameModel.unoBoard.getCardsForPlayer(playerNumber);
+        ComputerPlayerAdapter computerPlayerAdapter = new ComputerPlayerAdapter(cards);
+        cards.addOnListChangedCallback(new ObservableList.OnListChangedCallback() {
+            @Override
+            public void onChanged(ObservableList sender) {
+                fragment.getActivity().runOnUiThread(() -> computerPlayerAdapter.notifyDataSetChanged());
+
+            }
+
+            @Override
+            public void onItemRangeChanged(ObservableList sender, int positionStart, int itemCount) {
+                fragment.getActivity().runOnUiThread(() -> computerPlayerAdapter.notifyDataSetChanged());
+            }
+
+            @Override
+            public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
+                fragment.getActivity().runOnUiThread(() -> computerPlayerAdapter.notifyDataSetChanged());
+            }
+
+            @Override
+            public void onItemRangeMoved(ObservableList sender, int fromPosition, int toPosition, int itemCount) {
+                fragment.getActivity().runOnUiThread(() -> computerPlayerAdapter.notifyDataSetChanged());
+            }
+
+            @Override
+            public void onItemRangeRemoved(ObservableList sender, int positionStart, int itemCount) {
+                fragment.getActivity().runOnUiThread(() -> computerPlayerAdapter.notifyDataSetChanged());
+            }
+        });
+        return computerPlayerAdapter;
     }
 
-    HumanPlayerAdapter getHumanPlayerAdapter(){
+    HumanPlayerAdapter getHumanPlayerAdapter() {
         ArrayList<Card> cards = gameModel.unoBoard.getCardsForPlayer(4);
         humanPlayerAdapter = new HumanPlayerAdapter(cards);
         selectedCardChangedCallback = new ObservableField.OnPropertyChangedCallback() {
@@ -56,20 +89,41 @@ public class UNOGameController {
     }
 
     public void pauseGame(){
-        humanPlayerAdapter.selectedCard.removeOnPropertyChangedCallback(selectedCardChangedCallback);
+//        humanPlayerAdapter.selectedCard.removeOnPropertyChangedCallback(selectedCardChangedCallback);
     }
 
     public void playCard(Context context) {
         if(gameModel.selectedCard != null){
-            Toast.makeText(context, ""+gameModel.selectedCard.getClass(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "" + gameModel.selectedCard.cardType.name() + ":" + gameModel.selectedCard.number, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void playGame(){
+    public void playGame() {
+        if (gameModel.victoryCheck()) {
+            return;
+        }
+
         // Just keep playing until someone wins. Right now this is setup for computer players only. Humans will change this logic a bit
-        while(!gameModel.victoryCheck()){
+
+        Runnable runnable = () -> {
             Player currentPlayer = gameModel.getCurrentPlayer();
             currentPlayer.move(gameModel);
+        };
+
+        try {
+            CountDownTimer timer = new CountDownTimer(4000, 1000) {
+                @Override
+                public void onTick(long l) {
+                    AsyncTask.execute(runnable);
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+            timer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

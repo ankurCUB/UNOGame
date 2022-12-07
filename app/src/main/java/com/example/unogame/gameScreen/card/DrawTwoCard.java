@@ -1,13 +1,14 @@
 package com.example.unogame.gameScreen.card;
 
 import com.example.unogame.R;
+import com.example.unogame.gameScreen.player.playStrategy.CardType;
 
-public class DrawTwoCard implements Card{
-    public int resourceLayout = R.layout.card_vertical_draw_two;
-    public int color;
-    public String number = "-2";
-    DrawTwoCard(int color){
+public class DrawTwoCard extends Card {
+    DrawTwoCard(int color) {
+        this.resourceLayout = R.layout.card_vertical_draw_two;
+        this.number = "-2";
         this.color = color;
+        this.cardType = CardType.DrawTwoCard;
     }
 
     @Override

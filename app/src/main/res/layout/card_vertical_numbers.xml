@@ -24,7 +24,7 @@
             tools:background="@drawable/card_bg_red"
             android:layout_height="match_parent"/>
         <TextView
-            android:text="@{card.number}"
+            android:text="@{card.number.toString()}"
             tools:text="1"
             style="@style/Letters"
             android:layout_margin="4dp"
