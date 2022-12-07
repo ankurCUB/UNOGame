@@ -1,6 +1,7 @@
 package com.example.unogame.gameScreen;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.example.unogame.dependencyInjection.AppComponent;
 import com.example.unogame.dependencyInjection.DaggerAppComponent;
 import com.example.unogame.gameScreen.data.DatabaseManager;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 public class LoginFragment extends Fragment {
@@ -26,6 +29,26 @@ public class LoginFragment extends Fragment {
     DatabaseManager databaseManager;
 
     FragmentLoginBinding binding;
+
+    private class SendLogin extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String[] params) {
+            String response = null;
+            try {
+                response = databaseManager.login(params[0], params[1]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.i("Login Results",response);
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String message) {
+            //process message
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +74,8 @@ public class LoginFragment extends Fragment {
             Log.i("Password", binding.password.getText().toString());
             Bundle bundle = new Bundle();
             bundle.putString("Username", binding.useName.getText().toString());
-
+            SendLogin job = new SendLogin();
+            job.execute(binding.useName.getText().toString(), binding.password.getText().toString());
             Intent intent = new Intent(this.getActivity(), GameScreenActivity.class);
             intent.putExtra("Username", bundle);
             startActivity(intent);
