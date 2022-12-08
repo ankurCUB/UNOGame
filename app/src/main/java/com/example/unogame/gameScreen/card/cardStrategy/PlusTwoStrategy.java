@@ -11,7 +11,7 @@ public class PlusTwoStrategy implements CardStrategy {
         return model.unoBoard.topDeck.get().color == card.color || model.unoBoard.topDeck.get().cardType == CardType.DrawTwoCard;
     }
 
-    public void playCard(UNOGameModel model, Card card) {
+    public void playCard(UNOGameModel model, Card card, int color) {
         model.incrementTurn();
         Player p = model.getCurrentPlayer();
         model.getBoard().dealSingleCard(p);

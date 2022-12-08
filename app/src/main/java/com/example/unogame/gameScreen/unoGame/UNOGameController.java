@@ -1,5 +1,7 @@
 package com.example.unogame.gameScreen.unoGame;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -11,11 +13,16 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
 
+import com.example.unogame.ScreenNavigator;
 import com.example.unogame.databinding.FragmentUNOGameBinding;
 import com.example.unogame.gameScreen.card.Card;
+import com.example.unogame.gameScreen.card.DrawFourCard;
+import com.example.unogame.gameScreen.card.WildCard;
 import com.example.unogame.gameScreen.data.UserDataModel;
 import com.example.unogame.gameScreen.player.HumanPlayer;
 import com.example.unogame.gameScreen.player.Player;
+
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -28,14 +35,17 @@ public class UNOGameController {
     private HumanPlayerAdapter humanPlayerAdapter;
     private Observable.OnPropertyChangedCallback selectedCardChangedCallback;
 
+    private ScreenNavigator screenNavigator;
+
     @Inject
-    public UNOGameController() {
+    public UNOGameController(ScreenNavigator screenNavigator) {
         // create new UNO board passing a user data model matching the current user
         UserDataModel userDataModel = new UserDataModel(0, "Lincoln");
         // pass generated board to UNO game Model
         UNOBoard unoBoard = new UNOBoard(userDataModel);
         unoBoard.generateBoard();
         gameModel = new UNOGameModel(0, unoBoard);
+        this.screenNavigator = screenNavigator;
     }
 
     ComputerPlayerAdapter getComputerPlayerAdapter(int playerNumber, Fragment fragment) {
@@ -128,8 +138,12 @@ public class UNOGameController {
                 gameModel.getBoard().topDeck.set(gameModel.selectedCard);
                 // remove the played card
                 gameModel.getCurrentPlayer().playerData.deck.remove(gameModel.selectedCard);
-                gameModel.selectedCard.strategy.playCard(gameModel, gameModel.selectedCard);
-                playGame(binding);
+
+                if (gameModel.selectedCard.getClass() == WildCard.class || gameModel.selectedCard.getClass() == DrawFourCard.class) {
+                    showChooseColorDialog(binding);
+                } else {
+                    playCardForHumanPlayer(binding, -1);
+                }
             } else {
                 Toast.makeText(binding.getRoot().getContext(), "Card can't be played. Choose another", Toast.LENGTH_SHORT).show();
             }
@@ -138,13 +152,36 @@ public class UNOGameController {
         }
     }
 
+    private void playCardForHumanPlayer(FragmentUNOGameBinding binding, int color) {
+        gameModel.selectedCard.strategy.playCard(gameModel, gameModel.selectedCard, color);
+        playGame(binding);
+    }
+
+    private void showChooseColorDialog(FragmentUNOGameBinding binding) {
+        Random rand = new Random();
+        AlertDialog.Builder builder = new AlertDialog.Builder(binding.getRoot().getContext());
+        builder.setTitle("Pick a color !");
+        DialogInterface.OnClickListener onClickListener = (dialogInterface, i) -> {
+            int selectedColor = gameModel.unoBoard.colors[i];
+            playCardForHumanPlayer(binding, selectedColor);
+        };
+        builder.setItems(new String[]{"Red", "Blue", "Yellow", "Green"}, onClickListener);
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                playCardForHumanPlayer(binding, gameModel.unoBoard.colors[rand.nextInt(4)]);
+            }
+        });
+        builder.create().show();
+    }
+
     public void playGame(FragmentUNOGameBinding binding) {
 
         // Just keep playing until someone wins. Right now this is setup for computer players only. Humans will change this logic a bit
 
         Runnable runnable = () -> {
             Player currentPlayer = gameModel.getCurrentPlayer();
-            currentPlayer.move(gameModel);
+            currentPlayer.move(gameModel, binding.getRoot().getContext());
         };
 
         try {
@@ -152,6 +189,8 @@ public class UNOGameController {
                 @Override
                 public void onTick(long l) {
                     if (gameModel.victoryCheck() || gameModel.getTurn() == 0) {
+                        String victoryString = "Oops! you lost!";
+                        Toast.makeText(binding.getRoot().getContext(), victoryString, Toast.LENGTH_SHORT).show();
                         onFinish();
                     } else {
                         AsyncTask.execute(runnable);

@@ -11,9 +11,14 @@ public class WildCardStrategy implements CardStrategy {
         return true;
     }
 
-    public void playCard(UNOGameModel model, Card card) {
-        Random rand = new Random();
-        card.color = model.unoBoard.colors[rand.nextInt(4)];
+    public void playCard(UNOGameModel model, Card card, int color) {
+        if (color != -1) {
+            card.color = color;
+        } else {
+            Random random = new Random();
+            card.color = model.unoBoard.colors[random.nextInt(4)];
+
+        }
         model.incrementTurn();
     }
 }

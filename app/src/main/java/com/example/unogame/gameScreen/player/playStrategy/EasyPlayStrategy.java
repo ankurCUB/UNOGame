@@ -1,5 +1,6 @@
 package com.example.unogame.gameScreen.player.playStrategy;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.unogame.gameScreen.card.Card;
@@ -7,7 +8,7 @@ import com.example.unogame.gameScreen.unoGame.UNOGameModel;
 
 public class EasyPlayStrategy implements GamePlayStrategy {
     @Override
-    public void move(UNOGameModel model) {
+    public void move(UNOGameModel model, Context context) {
         // the easy play strategy implements a greedy approach and will just play the first card it finds that is valid
 
         Card playedCard = null;
@@ -20,7 +21,7 @@ public class EasyPlayStrategy implements GamePlayStrategy {
                 model.getBoard().topDeck.set(playedCard);
                 // remove the played card
                 model.getCurrentPlayer().playerData.deck.remove(playedCard);
-                playedCard.strategy.playCard(model, playedCard);
+                playedCard.strategy.playCard(model, playedCard, -1);
                 break;
             }
         }
@@ -35,7 +36,7 @@ public class EasyPlayStrategy implements GamePlayStrategy {
                 // remove the played card
                 model.getCurrentPlayer().playerData.deck.remove(playedCard);
                 Log.i(tag, "Dealt card played:" + model.getTurn() + ":" + playedCard.cardType.name() + ":" + playedCard.number);
-                playedCard.strategy.playCard(model, playedCard);
+                playedCard.strategy.playCard(model, playedCard, -1);
             } else {
                 model.incrementTurn();
                 Log.i(tag, "Card dealt but couldn't be played");

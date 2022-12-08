@@ -10,7 +10,7 @@ public class ReverseCardStrategy implements CardStrategy {
         return model.unoBoard.topDeck.get().color == card.color || model.unoBoard.topDeck.get().cardType == CardType.ReverseCard;
     }
 
-    public void playCard(UNOGameModel model, Card card) {
+    public void playCard(UNOGameModel model, Card card, int color) {
         model.reverseDirection();
         model.incrementTurn();
     }

@@ -6,5 +6,5 @@ import com.example.unogame.gameScreen.unoGame.UNOGameModel;
 public interface CardStrategy {
     boolean isCardPlayable(UNOGameModel model, Card card);
 
-    void playCard(UNOGameModel model, Card card);
+    void playCard(UNOGameModel model, Card card, int color);
 }
