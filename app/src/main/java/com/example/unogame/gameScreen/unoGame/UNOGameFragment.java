@@ -43,9 +43,13 @@ public class UNOGameFragment extends Fragment {
         screenNavigator.setBackButton(getActivity(), false);
 
         binding.playCard.setOnClickListener(view -> {
-            controller.playCard(this.getContext());
-            controller.playGame();
+            controller.playCard(binding);
         });
+
+        binding.extraDeck.setOnClickListener(view -> {
+            controller.drawNewCard();
+        });
+
         controller.getGameModel().unoBoard.topDeck.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
@@ -60,8 +64,6 @@ public class UNOGameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        controller.startGame();
 
         RecyclerView player1Deck = binding.player1Deck;
         player1Deck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
@@ -80,7 +82,7 @@ public class UNOGameFragment extends Fragment {
 
         RecyclerView humanPlayerDeck = binding.humanPlayerDeck;
         humanPlayerDeck.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        humanPlayerDeck.setAdapter(controller.getComputerPlayerAdapter(1, this));
+        humanPlayerDeck.setAdapter(controller.getHumanPlayerAdapter(1, this));
 
     }
 

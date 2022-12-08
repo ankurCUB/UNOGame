@@ -10,6 +10,7 @@ import com.example.unogame.gameScreen.card.CardFactory;
 import com.example.unogame.gameScreen.card.SimpleCardFactory;
 import com.example.unogame.gameScreen.data.UserDataModel;
 import com.example.unogame.gameScreen.player.ComputerPlayer;
+import com.example.unogame.gameScreen.player.HumanPlayer;
 import com.example.unogame.gameScreen.player.Player;
 import com.example.unogame.gameScreen.player.playStrategy.CardType;
 import com.example.unogame.gameScreen.player.playStrategy.EasyPlayStrategy;
@@ -44,13 +45,14 @@ public class UNOBoard {
     }
 
     private void generatePlayers() {
-        // will comment this back in when human player is complete.
-        //players.add(new HumanPlayer(userDataModel));
-        for (int i = 0; i < 4; i++) {
+        UserDataModel humanPlayerDataModel = new UserDataModel((int) System.currentTimeMillis(), "Human");
+        players.add(new HumanPlayer(humanPlayerDataModel));
+        for (int i = 0; i < 3; i++) {
             UserDataModel computerUserDataModel = new UserDataModel((int) System.currentTimeMillis(), "Bot");
             players.add(new ComputerPlayer(computerUserDataModel, new EasyPlayStrategy()));
         }
     }
+
 
     private void generateDeck(){
         CardFactory cardFactory = new SimpleCardFactory();

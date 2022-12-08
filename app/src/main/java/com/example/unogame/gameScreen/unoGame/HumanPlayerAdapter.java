@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,15 +26,13 @@ import com.example.unogame.gameScreen.card.ReverseCard;
 import com.example.unogame.gameScreen.card.SkipCard;
 import com.example.unogame.gameScreen.card.WildCard;
 
-import java.util.ArrayList;
-
 public class HumanPlayerAdapter extends RecyclerView.Adapter<HumanPlayerAdapter.CardViewHolder> {
 
-    private final ArrayList<Card> cards;
+    private final ObservableArrayList<Card> cards;
 
     public ObservableField<CardViewHolder> selectedCard = new ObservableField<>();
 
-    public HumanPlayerAdapter(ArrayList<Card> cards) {
+    public HumanPlayerAdapter(ObservableArrayList<Card> cards) {
         this.cards = cards;
     }
 
