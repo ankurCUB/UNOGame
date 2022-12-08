@@ -40,6 +40,7 @@ public class SelectPlayFragment extends Fragment {
     public void onResume() {
         super.onResume();
         binding.playGame.setOnClickListener(view -> selectPlayController.startGame(getActivity()));
+        // add stat screen
     }
 
 
