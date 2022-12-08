@@ -13,5 +13,6 @@ The project 7 changes are documented in Project 7.pdf in the base directory.
 
 
 The project can be setup by downloading Android Studio and forking the repo.
-;
+
+
 The demonstration can be found at the this link : https://drive.google.com/file/d/1LH1Zxg_xNHt9m-pUXIuEs_AxlLmiEO-8/view?usp=sharing
