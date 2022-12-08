@@ -4,5 +4,7 @@ import com.example.unogame.gameScreen.card.Card;
 import com.example.unogame.gameScreen.unoGame.UNOGameModel;
 
 public interface CardStrategy {
-    public void cardPlayed(UNOGameModel model);
+    boolean isCardPlayable(UNOGameModel model, Card card);
+
+    void playCard(UNOGameModel model, Card card, int color);
 }
