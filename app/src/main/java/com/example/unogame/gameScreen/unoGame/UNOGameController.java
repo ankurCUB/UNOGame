@@ -189,8 +189,6 @@ public class UNOGameController {
                 @Override
                 public void onTick(long l) {
                     if (gameModel.victoryCheck() || gameModel.getTurn() == 0) {
-                        String victoryString = "Oops! you lost!";
-                        Toast.makeText(binding.getRoot().getContext(), victoryString, Toast.LENGTH_SHORT).show();
                         onFinish();
                     } else {
                         AsyncTask.execute(runnable);
